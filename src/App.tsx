@@ -14,12 +14,14 @@ export default function App() {
   const [speechRate, setSpeechRate] = useState<number>(0.8); // Friendly and easy to hear for young kids
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [starsCount, setStarsCount] = useState<number>(3); // Initial bonus stars to encourage kids!
+  const [selectedWordForWriting, setSelectedWordForWriting] = useState<string | null>(null);
 
   const handleEarnStar = () => {
     setStarsCount((prev) => prev + 1);
   };
 
   const handleSelectForWriting = (word: string) => {
+    setSelectedWordForWriting(word);
     setActiveTab('writing');
     if (soundEnabled) SoundEffects.pop();
   };
@@ -69,6 +71,7 @@ export default function App() {
               speechRate={speechRate}
               soundEnabled={soundEnabled}
               onEarnStar={handleEarnStar}
+              initialWord={selectedWordForWriting}
             />
           )}
 
