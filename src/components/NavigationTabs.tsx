@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { BookOpen, PenTool, CheckSquare, Gamepad2, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BookOpen, PenTool, CheckSquare, Gamepad2, Sparkles, ClipboardCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SoundEffects } from '../utils/audio';
 
-export type TabType = 'vocab' | 'writing' | 'exercises' | 'games' | 'grammar';
+export type TabType = 'vocab' | 'writing' | 'exercises' | 'games' | 'grammar' | 'report';
 
 interface NavigationTabsProps {
   activeTab: TabType;
@@ -59,6 +59,14 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
       badge: '3 cấu trúc',
       activeBg: 'bg-sky-100 text-sky-950 border-sky-400 shadow-md ring-2 ring-sky-300',
       tagEmoji: '💡'
+    },
+    {
+      id: 'report' as TabType,
+      label: 'Bảng Tổng Kết',
+      icon: ClipboardCheck,
+      badge: 'Gửi cô giáo 📋',
+      activeBg: 'bg-gradient-to-r from-amber-500 to-rose-500 text-white border-amber-600 shadow-md ring-2 ring-amber-300',
+      tagEmoji: '🏆'
     },
   ];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, Sparkles, VolumeX, Gauge } from 'lucide-react';
+import { Volume2, Sparkles, VolumeX, Gauge, ClipboardCheck } from 'lucide-react';
 import { SoundEffects } from '../utils/audio';
 
 interface HeaderProps {
@@ -8,6 +8,7 @@ interface HeaderProps {
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
   starsCount: number;
+  onOpenReport?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   setSoundEnabled,
   starsCount,
+  onOpenReport,
 }) => {
   const speeds = [
     { label: '🐢 Rất chậm', short: '🐢', value: 0.6 },
@@ -60,16 +62,46 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Stars badge on mobile header top right */}
-          <div className="flex md:hidden items-center gap-1 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-amber-300 shadow-2xs">
-            <span className="text-amber-500 text-sm">⭐</span>
-            <span className="font-extrabold text-amber-900 text-xs">
-              {starsCount}
-            </span>
+          <div className="flex md:hidden items-center gap-1.5">
+            {onOpenReport && (
+              <button
+                onClick={() => {
+                  onOpenReport();
+                  if (soundEnabled) SoundEffects.pop();
+                }}
+                className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-extrabold text-[11px] shadow-2xs active:scale-95"
+              >
+                <span>Báo Cáo</span>
+                <span>📋</span>
+              </button>
+            )}
+            <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-amber-300 shadow-2xs">
+              <span className="text-amber-500 text-sm">⭐</span>
+              <span className="font-extrabold text-amber-900 text-xs">
+                {starsCount}
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Controls: Speed selector, Sound FX, Star Badges */}
         <div className="flex flex-wrap items-center justify-between sm:justify-end gap-1.5 sm:gap-3 w-full md:w-auto">
+          {/* Report Button (Desktop) */}
+          {onOpenReport && (
+            <button
+              onClick={() => {
+                onOpenReport();
+                if (soundEnabled) SoundEffects.pop();
+              }}
+              className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-black text-xs sm:text-sm shadow-sm hover:scale-105 active:scale-95 transition-all"
+              title="Bảng tổng kết gửi cô giáo"
+            >
+              <ClipboardCheck className="w-4 h-4" />
+              <span>Báo Cáo Gửi Cô</span>
+              <span className="bg-white/25 px-1.5 py-0.2 rounded-full text-[10px]">📋</span>
+            </button>
+          )}
+
           {/* Stars Collected (Desktop) */}
           <div className="hidden md:flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full border-2 border-amber-300 shadow-sm">
             <span className="text-amber-500 text-xl animate-bounce">⭐</span>

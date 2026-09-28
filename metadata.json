@@ -2,5 +2,7 @@
   "name": "Bé Vui Học Tiếng Trung",
   "description": "Ứng dụng ôn tập từ vựng, luyện viết chữ Hán có ô kẻ Tianzige và trò chơi vui nhộn cho học sinh nhỏ tuổi.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
